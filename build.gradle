@@ -44,6 +44,7 @@ processResources {
 }
 
 shadowJar {
+    archiveClassifier = null
     relocate("org.bstats", "com.shanebeestudios.backup.metrics")
     exclude('META-INF/**', 'LICENSE')
 }
