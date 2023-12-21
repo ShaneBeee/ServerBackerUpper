@@ -28,7 +28,7 @@ public class ZipFiles {
             ZipOutputStream zos = new ZipOutputStream(fos);
             for (String filePath : filesListInDir) {
                 if (filePath.contains("./libraries/") ||
-                        filePath.contains(".versions/") ||
+                        filePath.contains("./versions/") ||
                         filePath.endsWith("server-backup.zip") ||
                         filePath.endsWith(".tmp")) {
                     ServerBackup.print("&eSkipping " + filePath);
