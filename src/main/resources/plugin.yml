@@ -1,0 +1,9 @@
+name: ServerBackerUpper
+main: com.shanebeestudios.backup.ServerBackup
+version: '@version@'
+description: "A simple plugin to zip your entire server."
+api-version: '1.13'
+author: ShaneBee
+commands:
+  zipbackup:
+    description: Backup your entire server

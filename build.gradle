@@ -1,0 +1,49 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'com.shanebeestudios'
+version = '1.0.0'
+
+compileJava {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+
+    // Paper
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    // Paper
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+
+    // bStats
+    implementation(group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2')
+}
+
+build {
+    dependsOn(shadowJar)
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.compilerArgs.add("-Xlint:unchecked")
+            options.compilerArgs.add("-Xlint:deprecation")
+        }
+    }
+}
+
+processResources {
+    filter ReplaceTokens, tokens: ["version": project.version]
+}
+
+shadowJar {
+    relocate("org.bstats", "com.shanebeestudios.backup.metrics")
+    exclude('META-INF/**', 'LICENSE')
+}
